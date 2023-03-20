@@ -9,11 +9,11 @@ using UnityEngine;
 public class Grade : SupabaseModel
 {
 
-        [PrimaryKey("id", false)]
+        [PrimaryKey("GradeId", false)]
         public Guid GradeId { get; set; }
 
-        [Column("G_Score")]
-        public int G_Score { get; set; }
+        [Column("Score")]
+        public int Score { get; set; }
 
         //public virtual Student student { get; set; }
 
