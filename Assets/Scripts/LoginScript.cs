@@ -33,6 +33,10 @@ public class LoginScript : MonoBehaviour
     public Button loginButton;
     public GameObject LoginPanel;
 
+    //ui elements for main menu text setup
+    public TextMeshProUGUI usernameText;
+    public TextMeshProUGUI scoreText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -57,8 +61,11 @@ public class LoginScript : MonoBehaviour
                     {                       
                         userDataLogged.GradeID = grade.GradeId;
                         userDataLogged.Score = grade.Score;
-                        Debug.Log("Username: " + userDataLogged.Username + " Score: " + userDataLogged.Score);
-                        LoginPanel.SetActive(false);
+                        //main menu text setup
+                        usernameText.text = "Czesc, " + userDataLogged.Username + "!";
+                        scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
+                        gameManager.ChangePanelFunction(0);
+                        gameManager.ChangePanelFunction(1);
                         return;
                     }
                 }             
