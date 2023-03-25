@@ -22,10 +22,12 @@ public class LoginScript : MonoBehaviour
     //DB models
     public List<Student> students = new List<Student>();
     public List<Grade> grades = new List<Grade>();
+    public List<Question> questions = new List<Question>();
 
     //components
     [SerializeField] GameManager gameManager;
     [SerializeField] UserDataLogged userDataLogged;
+    [SerializeField] PanelSwitching panelSwitching;
 
     //ui elements
     public TMP_InputField usernameInput;
@@ -43,7 +45,15 @@ public class LoginScript : MonoBehaviour
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         userDataLogged = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserDataLogged>();
+        panelSwitching = GameObject.FindGameObjectWithTag("PanelManager").GetComponent<PanelSwitching>();
         Main();
+        if (userDataLogged.isLoggedIn == true)
+        {
+            usernameText.text = "Czesc, " + userDataLogged.Username + "!";
+            scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
+            panelSwitching.ChangePanelFunction(0);
+            panelSwitching.ChangePanelFunction(1);
+        }
         //Main2();
     }
     
@@ -64,8 +74,9 @@ public class LoginScript : MonoBehaviour
                         //main menu text setup
                         usernameText.text = "Czesc, " + userDataLogged.Username + "!";
                         scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
-                        gameManager.ChangePanelFunction(0);
-                        gameManager.ChangePanelFunction(1);
+                        userDataLogged.isLoggedIn = true;
+                        panelSwitching.ChangePanelFunction(0);
+                        panelSwitching.ChangePanelFunction(1);
                         return;
                     }
                 }             
@@ -90,6 +101,10 @@ public class LoginScript : MonoBehaviour
         //grades table
         var result2 = await client.From<Grade>().Get();
         grades = result2.Models;
+
+        //grades table
+        //var result3 = await client.From<Question>().Get();
+        //questions = result3.Models;
     }
 
   /*  public async void Main2()
