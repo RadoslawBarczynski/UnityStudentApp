@@ -9,6 +9,7 @@ public class PanelSwitching : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject homeworkMenuPanel;
     public GameObject TestPanel;
+    public GameObject GamesPanel;
 
     public void ChangePanelFunction(int value)
     {
@@ -31,6 +32,11 @@ public class PanelSwitching : MonoBehaviour
         {
             bool isActive = TestPanel.activeSelf;
             TestPanel.SetActive(!isActive);
+        }
+        else if(value == 4)
+        {
+            bool isActive = GamesPanel.activeSelf;
+            GamesPanel.SetActive(!isActive);
         }
     }
 }
