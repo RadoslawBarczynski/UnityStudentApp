@@ -12,6 +12,7 @@ using static UnityEditor.Progress;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 using TMPro;
+using Assets.Scripts.Models;
 
 public class LoginScript : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class LoginScript : MonoBehaviour
     public List<Student> students = new List<Student>();
     public List<Grade> grades = new List<Grade>();
     public List<Question> questions = new List<Question>();
+    public List<Test> tests = new List<Test>();
+    public List<TestQuestion> testquestions = new List<TestQuestion>();
 
     //components
     [SerializeField] GameManager gameManager;
@@ -102,23 +105,18 @@ public class LoginScript : MonoBehaviour
         var result2 = await client.From<Grade>().Get();
         grades = result2.Models;
 
-        //grades table
-        //var result3 = await client.From<Question>().Get();
-        //questions = result3.Models;
+        //test table
+        var result3 = await client.From<Question>().Get();
+        questions = result3.Models;
+
+        //question table
+        var result4 = await client.From<Test>().Get();
+        tests = result4.Models;
+
+        //testquestion table
+        var result5 = await client.From<TestQuestion>().Get();
+        testquestions = result5.Models;
     }
 
-  /*  public async void Main2()
-    {
-        url = "https://melfibfnkmadpskpvist.supabase.co";
-        key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1lbGZpYmZua21hZHBza3B2aXN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzgxOTIxMTcsImV4cCI6MTk5Mzc2ODExN30.Kd7kp1eiKHzcTsg7noH02E_smiAJR_Y-9kR45wg6UlE";
 
-        client = await Supabase.Client.InitializeAsync(url, key, new Supabase.SupabaseOptions
-        {
-            AutoConnectRealtime = true
-        });
-
-        //grades table
-        var result2 = await client.From<Grade>().Get();
-        grades = result2.Models;
-    }*/
 }
