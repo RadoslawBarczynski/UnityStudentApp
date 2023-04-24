@@ -19,6 +19,6 @@ public class ChangeSceneScript : MonoBehaviour
 
     public void ChangeSceneToLearning()
     {
-        SceneManager.LoadScene("LearningScene");
+        SceneManager.LoadScene("NumberCrush");
     }
 }
