@@ -87,6 +87,15 @@ public class LoginScript : MonoBehaviour
         }
     }
 
+    public void DbForUserSetup()
+    {
+        userDataLogged.questions = questions;
+        userDataLogged.students = students;
+        userDataLogged.testquestions = testquestions;
+        userDataLogged.tests = tests;
+        userDataLogged.grades = grades;
+    }
+
     public async void Main()
     {
         url = "https://melfibfnkmadpskpvist.supabase.co";
@@ -116,6 +125,9 @@ public class LoginScript : MonoBehaviour
         //testquestion table
         var result5 = await client.From<TestQuestion>().Get();
         testquestions = result5.Models;
+
+
+        DbForUserSetup();
     }
 
 

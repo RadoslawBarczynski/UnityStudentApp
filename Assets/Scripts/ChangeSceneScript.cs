@@ -21,4 +21,9 @@ public class ChangeSceneScript : MonoBehaviour
     {
         SceneManager.LoadScene("NumberCrush");
     }
+
+    public void ChangeSceneToTests()
+    {
+        SceneManager.LoadScene("TestScene");
+    }
 }

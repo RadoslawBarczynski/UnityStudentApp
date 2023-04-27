@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NumberCrush.unity
     guid: 9b9f465fddca2fc4dad9464d2d389577
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: ea391774afd93de4492031e605be4cd8
   m_configObjects: {}

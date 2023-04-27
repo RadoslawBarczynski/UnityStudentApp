@@ -1,3 +1,4 @@
+using Assets.Scripts.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,4 +12,11 @@ public class UserDataLogged : MonoBehaviour
     public int Score;
 
     public bool isLoggedIn;
+
+    //DB models
+    public List<Student> students;
+    public List<Grade> grades;
+    public List<Question> questions;
+    public List<Test> tests;
+    public List<TestQuestion> testquestions;
 }
