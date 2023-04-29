@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScene.unity
     guid: ea391774afd93de4492031e605be4cd8
+  - enabled: 1
+    path: Assets/Scenes/OperationEqualiser.unity
+    guid: b5db439e379af3b4a9021e27834cd953
   m_configObjects: {}

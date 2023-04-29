@@ -17,7 +17,7 @@ public class ChangeSceneScript : MonoBehaviour
         SceneManager.LoadScene("MainMenuScene");
     }
 
-    public void ChangeSceneToLearning()
+    public void ChangeSceneToNumberCrush()
     {
         SceneManager.LoadScene("NumberCrush");
     }
@@ -26,4 +26,10 @@ public class ChangeSceneScript : MonoBehaviour
     {
         SceneManager.LoadScene("TestScene");
     }
+    public void ChangeSceneToOperationEqualiser()
+    {
+        SceneManager.LoadScene("OperationEqualiser");
+    }
+
 }
+

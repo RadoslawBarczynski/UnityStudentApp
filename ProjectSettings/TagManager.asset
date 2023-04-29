@@ -7,6 +7,7 @@ TagManager:
   - GameManager
   - GameManagerParent
   - PanelManager
+  - TestManager
   layers:
   - Default
   - TransparentFX

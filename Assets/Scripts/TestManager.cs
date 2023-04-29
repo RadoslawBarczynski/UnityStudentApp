@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TestManager : MonoBehaviour
@@ -9,6 +11,7 @@ public class TestManager : MonoBehaviour
     private Guid activeTestId;
     private int i = 0; //current iteration
     private int j = 0; //max questions
+    public int testPoints = 0;
 
     //components
     private UserDataLogged userDataLogged;
@@ -18,9 +21,12 @@ public class TestManager : MonoBehaviour
     public GameObject TestPanelObject;
     public GameObject PanelsParent;
     public GameObject StartPanel;
+    public GameObject EndPanel;
+
+    public TextMeshProUGUI EndPanelText;
+    public TextMeshProUGUI PassText;
     [SerializeField] 
     public List<GameObject> questionsPanels = new List<GameObject>();
-
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +35,30 @@ public class TestManager : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         FindActiveTestToSet();
         GenerateTestPanelsForEachQuestion();
+    }
+
+    public void SetPoint()
+    {
+        EndPanelText.text = "Miales " +  testPoints + "/" + questionsPanels.Count + " poprawnych odpowiedzi!";
+        isPassed();
+    }
+
+    public void isPassed()
+    {
+        float result = Mathf.InverseLerp(0, questionsPanels.Count, testPoints);
+
+        if(result * 100 >= 50f)
+        {
+            PassText.text = "Zdane!";
+            PassText.color = Color.green;
+            Debug.Log("Zdane!");
+        }
+        else
+        {
+            PassText.text = "Niezdane!";
+            PassText.color = Color.red;
+            Debug.Log("Niezdane!");
+        }
     }
 
     void FindActiveTestToSet()
@@ -54,7 +84,8 @@ public class TestManager : MonoBehaviour
 
                 Debug.Log(questionFound.id);
 
-                GameObject clone = Instantiate(TestPanelObject, transform.position, transform.rotation, PanelsParent.transform);
+                //-96 to center the object
+                GameObject clone = Instantiate(TestPanelObject, new Vector3(transform.position.x - 96, transform.position.y, transform.position.z), transform.rotation, PanelsParent.transform);
                 TestPanelObjectVariables testPanelObjectVariables = clone.GetComponent<TestPanelObjectVariables>();
 
                 testPanelObjectVariables.ContentSetup(questionFound.operation, questionFound.answer1.ToString(), questionFound.answer2.ToString(), questionFound.answer3.ToString());
@@ -83,6 +114,11 @@ public class TestManager : MonoBehaviour
                 questionsPanels[i - 1].SetActive(false);
                 i++;
             }
+        }
+        else if(i == j)
+        {
+            questionsPanels[i-1].SetActive(false);
+            EndPanel.SetActive(true);
         }
     }
 }
