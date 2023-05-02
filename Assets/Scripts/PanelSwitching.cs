@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,17 +27,27 @@ public class PanelSwitching : MonoBehaviour
         else if (value == 2)
         {
             bool isActive = homeworkMenuPanel.activeSelf;
-            homeworkMenuPanel.SetActive(!isActive);
+            if (isActive)
+            {
+                homeworkMenuPanel.GetComponent<LeanTweenPositionAnim>().OnDisable();
+            }
+            else
+            {
+                homeworkMenuPanel.SetActive(!isActive);
+            }
+            //homeworkMenuPanel.SetActive(!isActive);
         }
-        else if (value == 3)
-        {
-            bool isActive = TestPanel.activeSelf;
-            TestPanel.SetActive(!isActive);
-        }
-        else if(value == 4)
+        else if(value == 3)
         {
             bool isActive = GamesPanel.activeSelf;
-            GamesPanel.SetActive(!isActive);
+            if (isActive)
+            {
+                GamesPanel.GetComponent<LeanTweenPositionAnim>().OnDisable();
+            }
+            else
+            {
+                GamesPanel.SetActive(!isActive);
+            }
         }
     }
 }
