@@ -31,5 +31,10 @@ public class ChangeSceneScript : MonoBehaviour
         SceneManager.LoadScene("OperationEqualiser");
     }
 
+    public void ChangeSceneTo2048()
+    {
+        SceneManager.LoadScene("2048");
+    }
+
 }
 

@@ -19,4 +19,5 @@ public class UserDataLogged : MonoBehaviour
     public List<Question> questions;
     public List<Test> tests;
     public List<TestQuestion> testquestions;
+    public List<Homework> homeworks;
 }

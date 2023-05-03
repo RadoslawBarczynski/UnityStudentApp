@@ -26,6 +26,7 @@ public class LoginScript : MonoBehaviour
     public List<Question> questions = new List<Question>();
     public List<Test> tests = new List<Test>();
     public List<TestQuestion> testquestions = new List<TestQuestion>();
+    public List<Homework> homeworks = new List<Homework>();
 
     //components
     [SerializeField] GameManager gameManager;
@@ -80,6 +81,7 @@ public class LoginScript : MonoBehaviour
                         userDataLogged.isLoggedIn = true;
                         panelSwitching.ChangePanelFunction(0);
                         panelSwitching.ChangePanelFunction(1);
+                        gameManager.SpawnHomework();
                         return;
                     }
                 }             
@@ -94,6 +96,7 @@ public class LoginScript : MonoBehaviour
         userDataLogged.testquestions = testquestions;
         userDataLogged.tests = tests;
         userDataLogged.grades = grades;
+        userDataLogged.homeworks = homeworks;
     }
 
     public async void Main()
@@ -125,6 +128,9 @@ public class LoginScript : MonoBehaviour
         //testquestion table
         var result5 = await client.From<TestQuestion>().Get();
         testquestions = result5.Models;
+
+        var result6 = await client.From<Homework>().Get();
+        homeworks = result6.Models;
 
 
         DbForUserSetup();
