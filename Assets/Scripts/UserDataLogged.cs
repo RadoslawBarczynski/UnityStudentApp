@@ -13,6 +13,8 @@ public class UserDataLogged : MonoBehaviour
 
     public bool isLoggedIn;
 
+    public List<Homework> homeworksToDelete = new List<Homework>();
+
     //DB models
     public List<Student> students;
     public List<Grade> grades;

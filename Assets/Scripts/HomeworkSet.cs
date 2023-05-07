@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,7 @@ public class HomeworkSet : MonoBehaviour
     public TextMeshProUGUI description;
     public int numberOfGame;
     public string GameName;
+    public Guid homeworkId;
 
     public void SetTextFields(int score)
     {

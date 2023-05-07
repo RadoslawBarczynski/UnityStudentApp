@@ -12,6 +12,13 @@ public class PanelSwitching : MonoBehaviour
     public GameObject TestPanel;
     public GameObject GamesPanel;
 
+    public GameManager gameManager;
+
+    void Start()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
+
     public void ChangePanelFunction(int value)
     {
         if (value == 0)
@@ -27,13 +34,14 @@ public class PanelSwitching : MonoBehaviour
         else if (value == 2)
         {
             bool isActive = homeworkMenuPanel.activeSelf;
-            if (isActive)
+            if (homeworkMenuPanel.activeSelf == true)
             {
                 homeworkMenuPanel.GetComponent<LeanTweenPositionAnim>().OnDisable();
             }
-            else
+            else if(homeworkMenuPanel.activeSelf == false)
             {
                 homeworkMenuPanel.SetActive(!isActive);
+                gameManager.SpawnHomework();
             }
             //homeworkMenuPanel.SetActive(!isActive);
         }

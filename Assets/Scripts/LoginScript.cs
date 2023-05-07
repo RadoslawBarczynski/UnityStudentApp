@@ -81,7 +81,6 @@ public class LoginScript : MonoBehaviour
                         userDataLogged.isLoggedIn = true;
                         panelSwitching.ChangePanelFunction(0);
                         panelSwitching.ChangePanelFunction(1);
-                        gameManager.SpawnHomework();
                         return;
                     }
                 }             

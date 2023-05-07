@@ -8,6 +8,8 @@ TagManager:
   - GameManagerParent
   - PanelManager
   - TestManager
+  - HomeworkManager
+  - HomeworkParent
   layers:
   - Default
   - TransparentFX

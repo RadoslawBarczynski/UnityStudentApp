@@ -13,12 +13,18 @@ public class OperationEqualiserManager : MonoBehaviour
     public TextMeshProUGUI stageText, endText;
     public GameObject EndGamePanel;
 
+    //components
+    public UserDataLogged userDataLogged;
+    public GameManager gameManager;
+
     //variables
     public int points = 0, stage, correctIndex;
 
     // Start is called before the first frame update
     void Start()
     {
+        userDataLogged = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserDataLogged>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         stage = 1;
         GenerateOperation();
     }
@@ -44,9 +50,9 @@ public class OperationEqualiserManager : MonoBehaviour
 
         correctIndex = indexA;
 
-        Debug.Log("x1 " + x1);
-        Debug.Log("x2 " + x2);
-        Debug.Log("result " + result);
+        //Debug.Log("x1 " + x1);
+        //Debug.Log("x2 " + x2);
+        //Debug.Log("result " + result);
 
         for (int i = 0; i < 3; i++)
         {
@@ -99,24 +105,24 @@ public class OperationEqualiserManager : MonoBehaviour
         if(value == correctIndex)
         {
             points++;
-            stage++;
         }
-        else if (stage == 5)
+        
+        if (stage == 5)
         {
+            Debug.Log("Koniec gry");
             setEndText();
-            EndGamePanel.SetActive(true);
             return;
         }
-        else
-        {
-            stage++;
-        }
+        stage++;
         GenerateOperation();
-        setEndText();
+        //setEndText();
     }
 
     public void setEndText()
     {
-        endText.text = "Rozwiazales poprawnie " + points + "/5 dzialan";
+        endText.text = "Rozwi¹za³eœ poprawnie " + points + "/5 dzialañ";
+
+        gameManager.CheckTasks(2, points);
+        EndGamePanel.SetActive(true);
     }
 }

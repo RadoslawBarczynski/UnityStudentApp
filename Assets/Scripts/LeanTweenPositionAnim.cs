@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LeanTweenPositionAnim : MonoBehaviour
 {
+
     private void OnEnable()
     {
         this.gameObject.transform.localPosition = new Vector2(0, -Screen.height);
@@ -12,7 +13,7 @@ public class LeanTweenPositionAnim : MonoBehaviour
 
     public void OnDisable()
     {
-        this.gameObject.transform.LeanMoveLocalY(-Screen.height, 0.5f).setEaseOutExpo().setOnComplete(OnComplete);
+        this.gameObject.transform.LeanMoveLocalY(-Screen.height, 0.2f).setEaseOutExpo().setOnComplete(OnComplete);
     }
 
     void OnComplete()
