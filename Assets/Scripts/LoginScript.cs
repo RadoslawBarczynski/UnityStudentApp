@@ -8,7 +8,6 @@ using Supabase.Realtime.Converters;
 using System;
 using Supabase.Realtime;
 using static Supabase.Client;
-using static UnityEditor.Progress;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 using TMPro;

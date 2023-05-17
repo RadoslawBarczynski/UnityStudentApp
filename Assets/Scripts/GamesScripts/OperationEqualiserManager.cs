@@ -124,5 +124,6 @@ public class OperationEqualiserManager : MonoBehaviour
 
         gameManager.CheckTasks(2, points);
         EndGamePanel.SetActive(true);
+        gameManager.UpdateScore(points, userDataLogged.UserID);
     }
 }

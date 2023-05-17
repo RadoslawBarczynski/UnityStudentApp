@@ -14,6 +14,7 @@ public class TestPanelObjectVariables : MonoBehaviour
     public TextMeshProUGUI correctAnswer;
     public TextMeshProUGUI inCorrectAnswer1;
     public TextMeshProUGUI inCorrectAnswer2;
+    public TextMeshProUGUI inCorrectAnswer3;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class TestPanelObjectVariables : MonoBehaviour
 
     public void ShuffleButton(List<GameObject> list)
     {
-        int random = Random.Range(0, 3);
+        int random = Random.Range(0, 4);
 
         for(int i = 0; i < list.Count; i++)
         {
@@ -53,11 +54,12 @@ public class TestPanelObjectVariables : MonoBehaviour
             testManager.testPoints++;
         }
     }
-    public void ContentSetup(string result, string correct, string incorrect1, string incorrect2)
+    public void ContentSetup(string result, string correct, string incorrect1, string incorrect2, string incorrect3)
     {
         resultText.text = result;
         correctAnswer.text = correct; 
         inCorrectAnswer1.text = incorrect1;
         inCorrectAnswer2.text = incorrect2;
+        inCorrectAnswer3.text = incorrect3; 
     }
 }

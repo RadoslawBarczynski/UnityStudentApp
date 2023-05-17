@@ -535,11 +535,13 @@ MonoBehaviour:
   TilePrefab: {fileID: 1105111046456590243, guid: f9ab11ec2de961f4ea71418e6b11cefb, type: 3}
   GameOverMenu: {fileID: 694101256}
   GridDimension: 5
-  Distance: 250
+  Distance: 210
   Score: 0
   StartingMoves: 30
   MovesText: {fileID: 66563743}
   ScoreText: {fileID: 1661646468}
+  gameManager: {fileID: 0}
+  userDataLogged: {fileID: 0}
 --- !u!1 &694101256
 GameObject:
   m_ObjectHideFlags: 0

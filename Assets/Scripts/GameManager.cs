@@ -5,7 +5,6 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Supabase.Client;
-using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,7 +35,7 @@ public class GameManager : MonoBehaviour
 
         foreach (var homework in userDataLogged.homeworks)
         {
-            if (homework.isActive && !userDataLogged.homeworksToDelete.Contains(homework))
+            if (homework.isActive && !userDataLogged.newGuids.Contains(homework.id))
             {
                  GenerateClone(homework);
             }
@@ -61,7 +60,7 @@ public class GameManager : MonoBehaviour
         {
             if(element.isActive == true && element.GameNumber == gameNumber && element.ScoreToGet < points)
             {
-                userDataLogged.homeworksToDelete.Add(element);
+                userDataLogged.newGuids.Add(element.id);
                 Debug.Log(element.id.ToString());
                 return;
             }
@@ -97,9 +96,26 @@ public class GameManager : MonoBehaviour
                 await grado.Update<Grade>();
             }
         }
-      
+
+        userDataLogged.Score += scoreToAdd;
+    }
+
+    public async void InsertScore(Logs logs)
+    {
+        url = "https://melfibfnkmadpskpvist.supabase.co";
+        key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1lbGZpYmZua21hZHBza3B2aXN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzgxOTIxMTcsImV4cCI6MTk5Mzc2ODExN30.Kd7kp1eiKHzcTsg7noH02E_smiAJR_Y-9kR45wg6UlE";
+
+        client = await Supabase.Client.InitializeAsync(url, key, new Supabase.SupabaseOptions
+        {
+            AutoConnectRealtime = true
+        });
+
+        //grades table
+        await client.From<Logs>().Insert(logs);
 
     }
+
+
 
 
 }

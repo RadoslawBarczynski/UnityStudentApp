@@ -720,6 +720,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626351277}
   m_CullTransparentMesh: 1
+--- !u!1 &729774559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 729774560}
+  m_Layer: 5
+  m_Name: PanelsParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &729774560
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729774559}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 933602628}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &859161507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,6 +1072,7 @@ RectTransform:
   - {fileID: 413392034}
   - {fileID: 859161508}
   - {fileID: 1653099982}
+  - {fileID: 729774560}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2093,7 +2130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testPoints: 0
   TestPanelObject: {fileID: 4979992368426357441, guid: a61134e41ac60264b8e0b79b2c182000, type: 3}
-  PanelsParent: {fileID: 933602627}
+  PanelsParent: {fileID: 729774559}
   StartPanel: {fileID: 413392033}
   EndPanel: {fileID: 1653099981}
   EndPanelText: {fileID: 861625261}

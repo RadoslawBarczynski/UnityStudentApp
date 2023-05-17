@@ -12,6 +12,9 @@ public class TileBoard : MonoBehaviour
     private List<Tile2048> tiles;
     public static bool waiting;
 
+    private Vector2 touchStartPos;
+    public float minSwipeDistance = 50f;
+
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
@@ -41,7 +44,7 @@ public class TileBoard : MonoBehaviour
         tiles.Add(tile);
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (!waiting)
         {
@@ -62,7 +65,62 @@ public class TileBoard : MonoBehaviour
                 MoveTiles(Vector2Int.right, grid.width - 2, -1, 0, 1);
             }
         }
-    }
+    }*/
+
+        private void Update()
+        {
+            if (!waiting)
+            {
+                if (Input.touchCount > 0)
+                {
+                    Touch touch = Input.GetTouch(0);
+
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        touchStartPos = touch.position;
+                    }
+                    else if (touch.phase == TouchPhase.Ended)
+                    {
+                        Vector2 touchEndPos = touch.position;
+                        Vector2 swipeDirection = touchEndPos - touchStartPos;
+
+                        if (swipeDirection.magnitude < minSwipeDistance)
+                        {
+                            return; // Ignore short swipes
+                        }
+
+                        swipeDirection.Normalize();
+
+                        if (swipeDirection.y > swipeDirection.x)
+                        {
+                            if (swipeDirection.y > -swipeDirection.x)
+                            {
+                                // Swipe Up
+                                MoveTiles(Vector2Int.up, 0, 1, 1, 1);
+                            }
+                            else
+                            {
+                                // Swipe Left
+                                MoveTiles(Vector2Int.left, 1, 1, 0, 1);
+                            }
+                        }
+                        else
+                        {
+                            if (swipeDirection.y > -swipeDirection.x)
+                            {
+                                // Swipe Right
+                                MoveTiles(Vector2Int.right, grid.width - 2, -1, 0, 1);
+                            }
+                            else
+                            {
+                                // Swipe Down
+                                MoveTiles(Vector2Int.down, 0, 1, grid.height - 2, -1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
     private void MoveTiles(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {

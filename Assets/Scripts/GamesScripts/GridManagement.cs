@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,14 +10,17 @@ public class GridManagement : MonoBehaviour
     public GameObject TilePrefab;
     public GameObject GameOverMenu;
     public int GridDimension = 5;
-    public float Distance = 1.0f;
+    public float Distance = 210f;
     public int Score = 0;
-    public int StartingMoves = 50;
+    public int StartingMoves = 30;
     private int _numMoves;
     private GameObject[,] Grid;
     public TextMeshProUGUI MovesText;
     public TextMeshProUGUI ScoreText;
-    
+
+    //components
+    public GameManager gameManager;
+    public UserDataLogged userDataLogged;
     public static GridManagement Instance { get; private set; }
 
     public int NumMoves
@@ -44,6 +46,8 @@ public class GridManagement : MonoBehaviour
     void Start()
     {
         Grid = new GameObject[GridDimension, GridDimension];
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        userDataLogged = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserDataLogged>();
         InitGrid();
     }
 
@@ -233,5 +237,7 @@ public class GridManagement : MonoBehaviour
     void GameOver()
     {
         GameOverMenu.SetActive(true);
+        int points = Score  / 100;
+        gameManager.UpdateScore(points, userDataLogged.UserID);
     }
 }
