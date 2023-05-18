@@ -7,6 +7,7 @@ public class ChangeSceneScript : MonoBehaviour
 {
     //components
     [SerializeField] GameManager gameManager;
+    [SerializeField] Animator transition;
 
     void Start()
     {
@@ -14,26 +15,40 @@ public class ChangeSceneScript : MonoBehaviour
     }
     public void ChangeSceneToMainMenu()
     {
-        SceneManager.LoadScene("MainMenuScene");
+        StartCoroutine(LoadLevel(0));
+        //SceneManager.LoadScene("MainMenuScene");
     }
 
     public void ChangeSceneToNumberCrush()
     {
-        SceneManager.LoadScene("NumberCrush");
+        StartCoroutine(LoadLevel(1));
+        //SceneManager.LoadScene("NumberCrush");
     }
 
     public void ChangeSceneToTests()
     {
-        SceneManager.LoadScene("TestScene");
+        StartCoroutine(LoadLevel(2));
+        //SceneManager.LoadScene("TestScene");
     }
     public void ChangeSceneToOperationEqualiser()
     {
-        SceneManager.LoadScene("OperationEqualiser");
+        StartCoroutine(LoadLevel(3));
+        //SceneManager.LoadScene("OperationEqualiser");
     }
 
     public void ChangeSceneTo2048()
     {
-        SceneManager.LoadScene("2048");
+        StartCoroutine(LoadLevel(4));
+        //SceneManager.LoadScene("2048");
+    }
+
+    IEnumerator LoadLevel(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene(levelIndex);
     }
 
 }

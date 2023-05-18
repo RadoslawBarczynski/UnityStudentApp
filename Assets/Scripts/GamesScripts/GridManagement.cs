@@ -17,6 +17,7 @@ public class GridManagement : MonoBehaviour
     private GameObject[,] Grid;
     public TextMeshProUGUI MovesText;
     public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI EndPanelText;
 
     //components
     public GameManager gameManager;
@@ -236,8 +237,9 @@ public class GridManagement : MonoBehaviour
 
     void GameOver()
     {
+        int points = Score / 100;
+        EndPanelText.text = "Otrzymujesz " + points + " punktów do swojego ogólnego wyniku punktowego.";
         GameOverMenu.SetActive(true);
-        int points = Score  / 100;
         gameManager.UpdateScore(points, userDataLogged.UserID);
     }
 }
