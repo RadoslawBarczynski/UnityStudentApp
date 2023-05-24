@@ -65,7 +65,7 @@ public class LoginScript : MonoBehaviour
     {
         foreach(var student in students)
         {
-            if(usernameInput.text == student.StudentLogin && VerifyPassword(passwordInput.text, student.StudentPassword)/* passwordInput.text == student.StudentPassword*/)
+            if(usernameInput.text == student.StudentLogin && VerifyPassword(passwordInput.text, student.StudentPassword))/* passwordInput.text == student.StudentPassword*/
             {
                 userDataLogged.Username = student.StudentFirstName;
                 userDataLogged.UserID = student.id;
