@@ -1545,6 +1545,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crossfade
       objectReference: {fileID: 0}
+    - target: {fileID: 5166166621683040450, guid: a4a237763fd2355438e36f95c8cba5d5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5166166621683040453, guid: a4a237763fd2355438e36f95c8cba5d5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2288,6 +2292,7 @@ MonoBehaviour:
   - {fileID: 248710084}
   stageText: {fileID: 939066081}
   endText: {fileID: 1154027880}
+  pointsText: {fileID: 189828360}
   EndGamePanel: {fileID: 141558623}
   userDataLogged: {fileID: 0}
   gameManager: {fileID: 0}

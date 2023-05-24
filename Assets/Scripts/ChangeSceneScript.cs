@@ -42,7 +42,7 @@ public class ChangeSceneScript : MonoBehaviour
         //SceneManager.LoadScene("2048");
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    public IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("Start");
 

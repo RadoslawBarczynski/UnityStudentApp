@@ -15,11 +15,14 @@ public class PanelSwitching : MonoBehaviour
     public GameObject TestPanel;
     public GameObject GamesPanel;
     public GameObject FeedbackPanel;
+    public GameObject AlertBox;
 
     public GameManager gameManager;
     public UserDataLogged userDataLogged;
 
     public TextMeshProUGUI scoreText;
+
+    public ChangeSceneScript changeSceneScript;
 
     void Start()
     {
@@ -89,5 +92,20 @@ public class PanelSwitching : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+    }
+
+    public void RandomGame()
+    {
+        if(userDataLogged.isLoggedToday == 1)
+        {
+            int randomNumber = UnityEngine.Random.Range(1, 4);
+            if (randomNumber == 1) { changeSceneScript.ChangeSceneTo2048(); }
+            else if (randomNumber == 2) { changeSceneScript.ChangeSceneToNumberCrush(); }
+            else if (randomNumber == 3) { changeSceneScript.ChangeSceneToOperationEqualiser(); }
+        }
+        else
+        {
+            AlertBox.SetActive(true);
+        }
     }
 }

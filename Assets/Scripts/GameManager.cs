@@ -8,6 +8,10 @@ using static Supabase.Client;
 
 public class GameManager : MonoBehaviour
 {
+    //playerprefs last login
+    private const string LastLoginKey = "LastLogin";
+    private const int LoggedInToday = 0;
+    private const int NotLoggedInToday = 1;
     //db
     string url;
     string key;
@@ -113,6 +117,42 @@ public class GameManager : MonoBehaviour
         //grades table
         await client.From<Logs>().Insert(logs);
 
+    }
+
+    public void checkLastLogin()
+    {
+        DateTime currentDate = DateTime.Now.Date;
+        int i = PlayerPrefs.GetInt(LastLoginKey, NotLoggedInToday);
+
+        // SprawdŸ, czy u¿ytkownik zalogowa³ siê dzisiaj
+        if (i == LoggedInToday && currentDate == GetSavedLoginDate())
+        {
+            Debug.Log("U¿ytkownik zalogowa³ siê dzisiaj.");
+            userDataLogged.isLoggedToday = i;
+            i = NotLoggedInToday;
+        }
+        else
+        {
+            Debug.Log("U¿ytkownik nie zalogowa³ siê dzisiaj.");
+            userDataLogged.isLoggedToday = i;
+            i = LoggedInToday;
+        }
+
+        // Zapisz aktualn¹ datê jako ostatnie logowanie
+        PlayerPrefs.SetInt(LastLoginKey, i);
+        SaveLoginDate(currentDate);
+        PlayerPrefs.Save();
+    }
+
+    private DateTime GetSavedLoginDate()
+    {
+        string savedDate = PlayerPrefs.GetString(LastLoginKey + "_Date");
+        return DateTime.Parse(savedDate);
+    }
+
+    private void SaveLoginDate(DateTime date)
+    {
+        PlayerPrefs.SetString(LastLoginKey + "_Date", date.ToString());
     }
 
 

@@ -9,6 +9,7 @@ using System;
 using Supabase.Realtime;
 using static Supabase.Client;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 using UnityEngine.UI;
 using TMPro;
 using Assets.Scripts.Models;
@@ -64,7 +65,7 @@ public class LoginScript : MonoBehaviour
     {
         foreach(var student in students)
         {
-            if(usernameInput.text == student.StudentLogin && passwordInput.text == student.StudentPassword)
+            if(usernameInput.text == student.StudentLogin && VerifyPassword(passwordInput.text, student.StudentPassword)/* passwordInput.text == student.StudentPassword*/)
             {
                 userDataLogged.Username = student.StudentFirstName;
                 userDataLogged.UserID = student.id;
@@ -78,6 +79,7 @@ public class LoginScript : MonoBehaviour
                         usernameText.text = "Czesc, " + userDataLogged.Username + "!";
                         scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
                         userDataLogged.isLoggedIn = true;
+                        gameManager.checkLastLogin();
                         panelSwitching.ChangePanelFunction(0);
                         panelSwitching.ChangePanelFunction(1);
                         return;
@@ -132,6 +134,64 @@ public class LoginScript : MonoBehaviour
 
 
         DbForUserSetup();
+    }
+
+    private bool VerifyPassword(string enteredPassword, string savedHash)
+    {
+        byte[] hashBytes = ConvertHexStringToByteArray(savedHash);
+
+        using (var sha256 = SHA256.Create())
+        {
+            byte[] enteredPasswordBytes = System.Text.Encoding.UTF8.GetBytes(enteredPassword);
+            byte[] enteredPasswordHash = sha256.ComputeHash(enteredPasswordBytes);
+
+            return CompareByteArrays(enteredPasswordHash, hashBytes);
+        }
+    }
+
+    private byte[] ConvertHexStringToByteArray(string hexString)
+    {
+        int byteCount = hexString.Length / 2;
+        byte[] byteArray = new byte[byteCount];
+
+        for (int i = 0; i < byteCount; i++)
+        {
+            byteArray[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+        }
+
+        return byteArray;
+    }
+
+    private bool CompareByteArrays(byte[] array1, byte[] array2)
+    {
+        if (array1.Length != array2.Length)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < array1.Length; i++)
+        {
+            if (array1[i] != array2[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private string HashPassword(string password)
+    {
+        using (var sha256 = SHA256.Create())
+        {
+            byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+            byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+
+            // Konwertuj zahaszowany skrót na reprezentacjê szesnastkow¹
+            string hashedPassword = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+
+            return hashedPassword;
+        }
     }
 
 

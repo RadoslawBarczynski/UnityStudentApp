@@ -10,7 +10,7 @@ public class OperationEqualiserManager : MonoBehaviour
     public Sprite GreenBackground, RedBackground;
     public List<TextMeshProUGUI> OperationTextList = new List<TextMeshProUGUI>();
     public List<TextMeshProUGUI> AnswerTextList = new List<TextMeshProUGUI>();
-    public TextMeshProUGUI stageText, endText;
+    public TextMeshProUGUI stageText, endText, pointsText;
     public GameObject EndGamePanel;
 
     //components
@@ -121,6 +121,7 @@ public class OperationEqualiserManager : MonoBehaviour
     public void setEndText()
     {
         endText.text = "Rozwi¹za³eœ poprawnie " + points + "/5 dzialañ";
+        pointsText.text = "Otrzymujesz " + points + " punktów do swojego ogólnego wyniku punktowego.";
 
         gameManager.CheckTasks(2, points);
         EndGamePanel.SetActive(true);
