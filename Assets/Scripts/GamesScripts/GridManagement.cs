@@ -178,6 +178,7 @@ public class GridManagement : MonoBehaviour
 
         foreach (Image images in matchedTiles) // 7
         {
+            LeanTween.scale(images.gameObject, new Vector3(0, 0, 0), 0.2f);
             images.sprite = null;
         }
         Score += matchedTiles.Count;
@@ -227,9 +228,11 @@ public class GridManagement : MonoBehaviour
                         Image current = GetSpriteRendererAt(column, filler); // 4
                         Image next = GetSpriteRendererAt(column, filler + 1);
                         current.sprite = next.sprite;
+                        LeanTween.scale(current.gameObject, new Vector3(0.795845f, 0.795845f, 0.795845f), 0.2f);
                     }
                     Image last = GetSpriteRendererAt(column, GridDimension - 1);
-                    last.sprite = Sprites[Random.Range(0, Sprites.Count)]; // 5                   
+                    last.sprite = Sprites[Random.Range(0, Sprites.Count)];
+                    LeanTween.scale(last.gameObject, new Vector3(0.795845f, 0.795845f, 0.795845f), 0.2f);
                 }
             }
         }
