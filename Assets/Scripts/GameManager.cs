@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     string key;
     public Supabase.Client client;
 
+    //audio
+    public AudioSource audioSound;
+    public AudioClip[] sounds;
+
     //gameobjects
     public GameObject HomeworkParent;
     
@@ -128,7 +132,10 @@ public class GameManager : MonoBehaviour
         if (i == LoggedInToday && currentDate == GetSavedLoginDate())
         {
             Debug.Log("U¿ytkownik zalogowa³ siê dzisiaj.");
-            userDataLogged.isLoggedToday = i;
+        }
+        else if (i == LoggedInToday && currentDate != GetSavedLoginDate())
+        {
+            userDataLogged.isLoggedToday = NotLoggedInToday;
             i = NotLoggedInToday;
         }
         else
@@ -155,7 +162,11 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetString(LastLoginKey + "_Date", date.ToString());
     }
 
-
+    public void PlaySound(int i)
+    {
+        audioSound.clip = sounds[i];
+        audioSound.Play();
+    }
 
 
 }

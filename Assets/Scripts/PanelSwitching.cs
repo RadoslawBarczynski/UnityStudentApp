@@ -96,6 +96,8 @@ public class PanelSwitching : MonoBehaviour
 
     public void RandomGame()
     {
+        gameManager.checkLastLogin();
+
         if(userDataLogged.isLoggedToday == 1)
         {
             int randomNumber = UnityEngine.Random.Range(1, 4);
@@ -106,6 +108,7 @@ public class PanelSwitching : MonoBehaviour
         else
         {
             AlertBox.SetActive(true);
+            gameManager.PlaySound(2);
         }
     }
 }

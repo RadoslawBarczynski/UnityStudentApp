@@ -243,6 +243,7 @@ public class GridManagement : MonoBehaviour
         int points = Score / 100;
         EndPanelText.text = "Otrzymujesz " + points + " punktów do swojego ogólnego wyniku punktowego.";
         GameOverMenu.SetActive(true);
+        gameManager.PlaySound(1);
         gameManager.UpdateScore(points, userDataLogged.UserID);
     }
 }

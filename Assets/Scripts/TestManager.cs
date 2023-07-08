@@ -53,6 +53,7 @@ public class TestManager : MonoBehaviour
             PassText.text = "Zdane!";
             PassText.color = Color.green;
             Debug.Log("Zdane!");
+            gameManager.audioSound.clip = gameManager.sounds[1];
             if (isEnded)
             {
                 gameManager.UpdateScore(testPoints, userDataLogged.UserID);
@@ -62,6 +63,7 @@ public class TestManager : MonoBehaviour
         {
             PassText.text = "Niezdane!";
             PassText.color = Color.red;
+            gameManager.audioSound.clip = gameManager.sounds[0];
             Debug.Log("Niezdane!");
         }
     }
@@ -125,6 +127,7 @@ public class TestManager : MonoBehaviour
             questionsPanels[i-1].SetActive(false);
             EndPanel.SetActive(true);
             isPassed(true);
+            gameManager.audioSound.Play();
         }
     }
 

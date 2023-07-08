@@ -79,7 +79,7 @@ public class LoginScript : MonoBehaviour
                         usernameText.text = "Czesc, " + userDataLogged.Username + "!";
                         scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
                         userDataLogged.isLoggedIn = true;
-                        gameManager.checkLastLogin();
+                        //gameManager.checkLastLogin();
                         panelSwitching.ChangePanelFunction(0);
                         panelSwitching.ChangePanelFunction(1);
                         return;
