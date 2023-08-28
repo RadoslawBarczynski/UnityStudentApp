@@ -13,6 +13,7 @@ public class PressLogic : MonoBehaviour
     private GameObject startElement;
     private GameObject endElement;
     public MatchThemManager matchThemManager;
+    public ControlsManager controlsManager;
 
     public List<GameObject> clickableElements = new List<GameObject>();
 
@@ -93,12 +94,21 @@ public class PressLogic : MonoBehaviour
             if (results.Count > 0 && clickableElements.Contains(results[0].gameObject))
             {
                 endElement = results[0].gameObject;
-                matchThemManager.CheckAnswer(startElement.GetComponent<TextMeshProUGUI>().text, int.Parse(endElement.GetComponent<TextMeshProUGUI>().text));
-                //Debug.Log("Started dragging from: " + startElement.GetComponent<TextMeshProUGUI>().text + ", Ended dragging on: " + int.Parse(endElement.GetComponent<TextMeshProUGUI>().text));
-                //if(matchThemManager.CheckAnswer(startElement.GetComponent<TextMeshProUGUI>().text, int.Parse(endElement.GetComponent<TextMeshProUGUI>().text)))
-                //{
-                //  matchThemManager.GenerateMathObjects();
-                //}
+                if(controlsManager.CheckAnswer(startElement.GetComponent<TextMeshProUGUI>().text, int.Parse(endElement.GetComponent<TextMeshProUGUI>().text)))
+                {
+                    GameObject operation = startElement.transform.parent.gameObject;
+                    GameObject result = endElement.transform.parent.gameObject;
+
+                    clickableElements.Remove(startElement);
+                    clickableElements.Remove(endElement);
+
+                    Destroy(operation);
+                    Destroy(result);
+
+                    controlsManager.GenerateMathOperation();
+
+                    controlsManager.ShuffleElements(controlsManager.topParent);
+                }
             }
         }
     }

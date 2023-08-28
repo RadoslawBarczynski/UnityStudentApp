@@ -42,6 +42,12 @@ public class ChangeSceneScript : MonoBehaviour
         //SceneManager.LoadScene("2048");
     }
 
+    public void ChangeSceneToMatchThem()
+    {
+        StartCoroutine(LoadLevel(5));
+        //SceneManager.LoadScene("2048");
+    }
+
     public IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("Start");

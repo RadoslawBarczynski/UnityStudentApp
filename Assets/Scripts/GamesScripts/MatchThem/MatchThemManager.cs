@@ -3,134 +3,74 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class MatchThemManager : MonoBehaviour
 {
-    private System.Random random = new System.Random();
+    public float totalTime = 60f; 
+    private float currentTime;   
+    private bool timerRunning = false;
+    public TextMeshProUGUI timerText;       
+    public GameObject GameOverPanel;
+    public GameManager gameManager;
+    public TextMeshProUGUI EndPanelText;
+    public UserDataLogged userDataLogged;
+    public TextMeshProUGUI scoreText;
 
-    private string[] operations = { "+", "-", "×", "/" };
-
-    public List<GameObject> topElements = new List<GameObject>();
-    public List<GameObject> bottomElements = new List<GameObject>();
-
-
-    private List<string> previousOperations = new List<string>();
-
-    public Dictionary<GameObject, Tuple<string, int>> correctElements = new Dictionary<GameObject, Tuple<string, int>>();
+    private int score = 0;
 
     private void Start()
     {
-        GenerateMathObjects();
+        userDataLogged = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserDataLogged>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        currentTime = totalTime;
+        UpdateTimerText();
     }
 
-    public string GenerateOperation()
+    private void Update()
     {
-        return operations[random.Next(operations.Length)];
-    }
-
-    public int GenerateNumber(int min, int max)
-    {
-        return random.Next(min, max + 1);
-    }
-
-    public int CalculateResult(int num1, string operation, int num2)
-    {
-        switch (operation)
+        if (timerRunning)
         {
-            case "+":
-                return num1 + num2;
-            case "-":
-                return num1 - num2;
-            case "×":
-                return num1 * num2;
-            case "/":
-                if (num2 != 0)
-                    return num1 / num2;
-                else
-                    return int.MinValue; // Handle division by zero
-            default:
-                return int.MinValue; // Invalid operation
-        }
-    }
+            currentTime -= Time.deltaTime;
+            UpdateTimerText();
 
-    public void GenerateMathObjects()
-    {
-        int correctIndex = random.Next(3); // Index of the correct math object
-
-        string correctOperation = GenerateOperation();
-        while (previousOperations.Contains(correctOperation))
-        {
-            correctOperation = GenerateOperation();
-        }
-        previousOperations.Add(correctOperation);
-
-        int correctNumber1 = GenerateNumber(1, 10);
-        int correctNumber2 = GenerateNumber(1, 10);
-
-        int correctResult = CalculateResult(correctNumber1, correctOperation, correctNumber2);
-
-        for (int i = 0; i < 3; i++)
-        {
-            string operation = GenerateOperation();
-            while (previousOperations.Contains(operation))
+            if (currentTime <= 0f)
             {
-                operation = GenerateOperation();
-            }
-            previousOperations.Add(operation);
-
-            int number1 = GenerateNumber(1, 10);
-            int number2 = GenerateNumber(1, 10);
-
-            if (i == correctIndex)
-            {
-                topElements[i].GetComponentInChildren<TextMeshProUGUI>().text = correctNumber1.ToString() + " " + correctOperation + " " + correctNumber2.ToString();
-                bottomElements[i].GetComponentInChildren<TextMeshProUGUI>().text = correctResult.ToString();
-                correctElements[topElements[i]] = new Tuple<string, int>(correctNumber1.ToString() + " " + correctOperation + " " + correctNumber2.ToString(), correctResult);
-            }
-            else
-            {
-                int result = CalculateResult(number1, operation, number2);
-
-                topElements[i].GetComponentInChildren<TextMeshProUGUI>().text = number1.ToString() + " " + operation + " " + number2.ToString();
-
-                // Randomly choose whether to display a result or an operation
-                if (random.Next(2) == 0)
-                {
-                    bottomElements[i].GetComponentInChildren<TextMeshProUGUI>().text = result.ToString();
-                    correctElements[topElements[i]] = new Tuple<string, int>(number1.ToString() + " " + operation + " " + number2.ToString(), result);
-                }
-                else
-                {
-                    bottomElements[i].GetComponentInChildren<TextMeshProUGUI>().text = CalculateResult(number1, operation, number2).ToString();
-                    correctElements[topElements[i]] = new Tuple<string, int>(number1.ToString() + " " + operation + " " + number2.ToString(), result);
-                }
+                timerRunning = false;
+                currentTime = 0f;
+                UpdateTimerText();
+                GameOver();
             }
         }
     }
 
-    public void CheckAnswer(string operation, int result)
+    public void StartTimer()
     {
-        bool flag = false;
+        timerRunning = true;
+    }
 
-        foreach (KeyValuePair<GameObject, Tuple<string, int>> kvp in correctElements)
-        {
-            if (kvp.Value.Item1 == operation && kvp.Value.Item2 == result)
-            {
-                Debug.Log("Correct answer! Operation: " + operation + ", Result: " + result);
-                flag = true;
-                correctElements.Remove(kvp.Key);
-                break;
-            }
-        }
+    private void UpdateTimerText()
+    {
+        timerText.text = currentTime.ToString("F2"); // Wyœwietlanie czasu z dwoma miejscami po przecinku
+    }
 
-        if (flag)
-        {
-            //GenerateMathObjects();
-        }
-        else
-        {
-            Debug.Log("Incorrect answer! Keep trying.");
-        }
+    public void GameOver()
+    {
+        int points = score / 100;
+        EndPanelText.text = "Zdoby³eœ " + points + " punktów do swojego ogólnego wyniku punktowego.";
+        GameOverPanel.SetActive(true);
+        gameManager.PlaySound(1);
+        gameManager.UpdateScore(points, userDataLogged.UserID);
+    }
 
+    public void InscreseScore(int points)
+    {
+        SetScore(score + points);
+    }
+
+    private void SetScore(int score)
+    {
+        this.score = score;
+        scoreText.text = "Punkty: " + score.ToString();
     }
 }
