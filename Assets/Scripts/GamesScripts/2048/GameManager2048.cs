@@ -43,6 +43,7 @@ public class GameManager2048 : MonoBehaviour
         int points = score / 100;
         EndPanelText.text = "Zdoby³eœ " + points + " punktów do swojego ogólnego wyniku punktowego.";
         GameOverPanel.SetActive(true);
+        gameManager.CheckTasks(3, points);
         gameManager.PlaySound(1);
         gameManager.UpdateScore(points, userDataLogged.UserID);
     }

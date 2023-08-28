@@ -32,7 +32,8 @@ public class HomeworkSet : MonoBehaviour
         }
         else if (numberOfGame == 4)
         {
-            GameName = "znajdŸ œcie¿kê";
+            GameName = "Po³¹cz je";
+            description.text = "Uzyskaj " + score.ToString() + " punktów w grze " + GameName;
         }
         else
         {
@@ -56,7 +57,7 @@ public class HomeworkSet : MonoBehaviour
         }
         else if(numberOfGame == 4)
         {
-
+            SceneManager.LoadScene("MatchThem");
         }
     }
 

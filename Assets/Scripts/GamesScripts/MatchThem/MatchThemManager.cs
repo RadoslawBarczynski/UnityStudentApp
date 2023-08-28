@@ -58,6 +58,7 @@ public class MatchThemManager : MonoBehaviour
     {
         int points = score / 100;
         EndPanelText.text = "Zdoby³eœ " + points + " punktów do swojego ogólnego wyniku punktowego.";
+        gameManager.CheckTasks(4, points);
         GameOverPanel.SetActive(true);
         gameManager.PlaySound(1);
         gameManager.UpdateScore(points, userDataLogged.UserID);
