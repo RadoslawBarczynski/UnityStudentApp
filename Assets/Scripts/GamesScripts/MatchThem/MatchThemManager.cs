@@ -9,13 +9,17 @@ public class MatchThemManager : MonoBehaviour
 {
     public float totalTime = 60f; 
     private float currentTime;   
-    private bool timerRunning = false;
-    public TextMeshProUGUI timerText;       
+    private bool timerRunning = false; 
+    
     public GameObject GameOverPanel;
+    public GameObject floatingTextPrefab;
+
     public GameManager gameManager;
-    public TextMeshProUGUI EndPanelText;
     public UserDataLogged userDataLogged;
+
+    public TextMeshProUGUI EndPanelText;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timerText;
 
     private int score = 0;
 
@@ -67,6 +71,8 @@ public class MatchThemManager : MonoBehaviour
     public void InscreseScore(int points)
     {
         SetScore(score + points);
+        GameObject floatingPoints = Instantiate(floatingTextPrefab, scoreText.gameObject.transform.position, Quaternion.identity, scoreText.gameObject.transform.parent);
+        floatingPoints.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = points.ToString();
     }
 
     private void SetScore(int score)

@@ -3044,12 +3044,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalTime: 60
-  timerText: {fileID: 366113640}
   GameOverPanel: {fileID: 1064694514}
+  floatingTextPrefab: {fileID: 2603063133603943396, guid: cb739a02d10d20d42a1cbf47fa4f7fb3, type: 3}
   gameManager: {fileID: 0}
-  EndPanelText: {fileID: 966451023}
   userDataLogged: {fileID: 0}
+  EndPanelText: {fileID: 966451023}
   scoreText: {fileID: 2145515859}
+  timerText: {fileID: 366113640}
 --- !u!1001 &2097403861
 PrefabInstance:
   m_ObjectHideFlags: 0

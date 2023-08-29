@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class AvatarManager : MonoBehaviour
 {
     public Sprite[] avatarSprites;
+    public GameObject[] avatarButtons;
+
     private int selectedAvatarIndex = 0;
+
     public GameObject avatar;
     public GameObject avatarBorder;
 
@@ -34,9 +37,16 @@ public class AvatarManager : MonoBehaviour
 
     public void SetAvatar(int value)
     {
+        for (int i = 0; i < avatarButtons.Length; i++)
+        {
+            avatarButtons[i].GetComponent<Button>().interactable = true;
+        }
+
         if (value >= 0 && value < avatarSprites.Length)
         {
             avatar.GetComponent<Image>().sprite = avatarSprites[value];
+
+            avatarButtons[value].GetComponent<Button>().interactable = false;
 
             PlayerPrefs.SetInt("SelectedAvatarIndex", value);
 

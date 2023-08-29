@@ -7,7 +7,10 @@ using UnityEngine.SocialPlatforms.Impl;
 public class GameManager2048 : MonoBehaviour
 {
     public TileBoard board;
+
     public GameObject GameOverPanel;
+    public GameObject floatingTextPrefab;
+
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI bestText;
     public TextMeshProUGUI EndPanelText;
@@ -51,6 +54,8 @@ public class GameManager2048 : MonoBehaviour
     public void InscreseScore(int points)
     {
         SetScore(score + points);
+        GameObject floatingPoints = Instantiate(floatingTextPrefab, scoreText.gameObject.transform.position, Quaternion.identity, scoreText.gameObject.transform.parent);
+        floatingPoints.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = points.ToString();
     }
 
     private void SetScore(int score)

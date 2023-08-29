@@ -912,6 +912,7 @@ MonoBehaviour:
   - {fileID: -1853973892, guid: e94a441976b48834889117392771e4c7, type: 3}
   TilePrefab: {fileID: 1105111046456590243, guid: f9ab11ec2de961f4ea71418e6b11cefb, type: 3}
   GameOverMenu: {fileID: 694101256}
+  floatingTextPrefab: {fileID: 2603063133603943396, guid: cb739a02d10d20d42a1cbf47fa4f7fb3, type: 3}
   GridDimension: 5
   Distance: 210
   Score: 0
@@ -1871,37 +1872,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235354608}
   m_CullTransparentMesh: 1
---- !u!1 &1248006555
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1248006557}
-  m_Layer: 0
-  m_Name: LogicCore
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1248006557
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248006555}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 636.33673, y: 2272.75, z: -9.100773}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1280031451
 GameObject:
   m_ObjectHideFlags: 0

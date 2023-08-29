@@ -9,6 +9,8 @@ public class GridManagement : MonoBehaviour
     public List<Sprite> Sprites = new List<Sprite>();
     public GameObject TilePrefab;
     public GameObject GameOverMenu;
+    public GameObject floatingTextPrefab;
+
     public int GridDimension = 5;
     public float Distance = 210f;
     public int Score = 0;
@@ -182,6 +184,8 @@ public class GridManagement : MonoBehaviour
             images.sprite = null;
         }
         Score += matchedTiles.Count;
+        GameObject floatingPoints = Instantiate(floatingTextPrefab, ScoreText.gameObject.transform.position, Quaternion.identity, ScoreText.gameObject.transform.parent);
+        floatingPoints.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = matchedTiles.Count.ToString();
         return matchedTiles.Count > 0; // 8
     }
 
