@@ -51,13 +51,13 @@ public class LoginScript : MonoBehaviour
         userDataLogged = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserDataLogged>();
         panelSwitching = GameObject.FindGameObjectWithTag("PanelManager").GetComponent<PanelSwitching>();
         Main();
-        if (userDataLogged.isLoggedIn == true)
-        {
-            usernameText.text = "Czesc, " + userDataLogged.Username + "!";
-            scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
-            panelSwitching.ChangePanelFunction(0);
-            panelSwitching.ChangePanelFunction(1);
-        }
+        //if (userDataLogged.isLoggedIn == true)
+        //{
+        //    usernameText.text = "Czesc, " + userDataLogged.Username + "!";
+        //    scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
+        //    panelSwitching.ChangePanelFunction(0);
+        //    panelSwitching.ChangePanelFunction(1);
+        //}
         //Main2();
     }
     
@@ -78,7 +78,7 @@ public class LoginScript : MonoBehaviour
                         //main menu text setup
                         usernameText.text = "Czesc, " + userDataLogged.Username + "!";
                         scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
-                        userDataLogged.isLoggedIn = true;
+                        //userDataLogged.isLoggedIn = true;
                         //gameManager.checkLastLogin();
                         panelSwitching.ChangePanelFunction(0);
                         panelSwitching.ChangePanelFunction(1);

@@ -12,7 +12,7 @@ public class UserDataLogged : MonoBehaviour
     public int Score;
     public int isLoggedToday;
 
-    public bool isLoggedIn;
+    //public bool isLoggedIn;
 
     //public List<Homework> homeworksToDelete = new List<Homework>();
     public List<Guid> newGuids = new List<Guid>();

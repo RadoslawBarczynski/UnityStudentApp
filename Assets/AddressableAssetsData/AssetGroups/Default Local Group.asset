@@ -25,8 +25,8 @@ MonoBehaviour:
     m_Address: Assets/Sounds/Happy.mp3
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 4cf900ad9c5ecfb4ab41dcf8a4585eef
-    m_Address: Assets/Sounds/AdventureHappy.mp3
+  - m_GUID: 8646cf06895b79647a42323f5f9a311c
+    m_Address: Assets/Sounds/summer-adventures.mp3
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
