@@ -35,8 +35,11 @@ public class GameManager : MonoBehaviour
     {
         homeworkController = GameObject.FindGameObjectWithTag("HomeworkManager").GetComponent<HomeworkController>();
         HomeworkParent = GameObject.FindGameObjectWithTag("HomeworkParent");
-        
-        foreach(var element in homeworkController.childrens)
+
+        userDataLogged.homeworks = userDataLogged.homeworks.Where(h => h.TeacherId == userDataLogged.TeacherId).ToList();
+
+
+        foreach (var element in homeworkController.childrens)
         {
             Destroy(element.gameObject);
         }

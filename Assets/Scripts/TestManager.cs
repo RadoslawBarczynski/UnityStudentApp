@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class TestManager : MonoBehaviour
     private int i = 0; //current iteration
     private int j = 0; //max questions
     public int testPoints = 0;
+    public bool isTestActive = false;
 
     //components
     private UserDataLogged userDataLogged;
@@ -23,6 +25,9 @@ public class TestManager : MonoBehaviour
     public GameObject StartPanel;
     public GameObject EndPanel;
 
+    public GameObject Button;
+
+    public TextMeshProUGUI StartText;
     public TextMeshProUGUI EndPanelText;
     public TextMeshProUGUI PassText;
     [SerializeField] 
@@ -34,8 +39,11 @@ public class TestManager : MonoBehaviour
         userDataLogged = GameObject.Find("GameManager").GetComponent<UserDataLogged>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         FindActiveTestToSet();
-        GenerateTestPanelsForEachQuestion();
-        ShufflePanels(questionsPanels);
+        if (isTestActive)
+        {
+            GenerateTestPanelsForEachQuestion();
+            ShufflePanels(questionsPanels);
+        }
     }
 
     public void SetPoint()
@@ -70,13 +78,23 @@ public class TestManager : MonoBehaviour
 
     void FindActiveTestToSet()
     {
-        foreach(var test in userDataLogged.tests)
+        userDataLogged.tests = userDataLogged.tests.Where(h => h.TeacherId == userDataLogged.TeacherId).ToList();
+
+        foreach (var test in userDataLogged.tests)
         {
             if (test.isActive)
             {
                 activeTestId = test.id;
                 Debug.Log(activeTestId);
+                StartText.text = "Jak bedziesz gotowy mozesz rozpoczac test przyciskiem START";
+                Button.SetActive(true);
+                isTestActive = true;
                 break;
+            }
+            else
+            {
+                StartText.text = "Nie masz ¿adnego testu do rozwi¹zania";
+                Button.SetActive(false);
             }
         }
     }

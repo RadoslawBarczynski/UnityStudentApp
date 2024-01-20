@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using UnityEngine.UI;
 using TMPro;
 using Assets.Scripts.Models;
+using System.Linq;
 
 public class LoginScript : MonoBehaviour
 {
@@ -51,13 +52,13 @@ public class LoginScript : MonoBehaviour
         userDataLogged = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserDataLogged>();
         panelSwitching = GameObject.FindGameObjectWithTag("PanelManager").GetComponent<PanelSwitching>();
         Main();
-        //if (userDataLogged.isLoggedIn == true)
-        //{
-        //    usernameText.text = "Czesc, " + userDataLogged.Username + "!";
-        //    scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
-        //    panelSwitching.ChangePanelFunction(0);
-        //    panelSwitching.ChangePanelFunction(1);
-        //}
+        if (userDataLogged.isLoggedIn)
+        {
+            usernameText.text = "Czesc, " + userDataLogged.Username + "!";
+            scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
+            panelSwitching.ChangePanelFunction(0);
+            panelSwitching.ChangePanelFunction(1);
+        }
         //Main2();
     }
     
@@ -75,10 +76,12 @@ public class LoginScript : MonoBehaviour
                     {                       
                         userDataLogged.GradeID = grade.GradeId;
                         userDataLogged.Score = grade.Score;
+                        userDataLogged.TeacherId = student.TeacherId;
+                        homeworks = homeworks.Where(h => h.TeacherId == userDataLogged.TeacherId).ToList();
                         //main menu text setup
                         usernameText.text = "Czesc, " + userDataLogged.Username + "!";
                         scoreText.text = "Masz " + userDataLogged.Score + " punktow!";
-                        //userDataLogged.isLoggedIn = true;
+                        userDataLogged.isLoggedIn = true;
                         //gameManager.checkLastLogin();
                         panelSwitching.ChangePanelFunction(0);
                         panelSwitching.ChangePanelFunction(1);
@@ -187,7 +190,7 @@ public class LoginScript : MonoBehaviour
             byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
             byte[] hashBytes = sha256.ComputeHash(passwordBytes);
 
-            // Konwertuj zahaszowany skrót na reprezentacjê szesnastkow¹
+            // Konwertuj zahaszowany skrï¿½t na reprezentacjï¿½ szesnastkowï¿½
             string hashedPassword = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
 
             return hashedPassword;

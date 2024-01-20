@@ -21,4 +21,7 @@ public class Homework : SupabaseModel
 
     [Column("isActive")]
     public bool isActive { get; set; }
+
+    [Column("TeacherId")]
+    public Guid TeacherId { get; set; }
 }

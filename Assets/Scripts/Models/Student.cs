@@ -24,6 +24,9 @@ public class Student : SupabaseModel
     [Column("Password")]
     public string StudentPassword { get; set; }
 
+    [Column("TeacherId")]
+    public Guid TeacherId { get; set; } 
+
 
 
     [Column("GradeId")]

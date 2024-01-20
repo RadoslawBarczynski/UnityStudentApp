@@ -11,6 +11,9 @@ public class UserDataLogged : MonoBehaviour
     public Guid GradeID;
     public int Score;
     public int isLoggedToday;
+    public bool isLoggedIn;
+
+    public Guid TeacherId;
 
     //public bool isLoggedIn;
 

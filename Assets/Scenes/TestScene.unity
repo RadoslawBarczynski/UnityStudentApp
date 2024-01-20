@@ -2253,10 +2253,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testPoints: 0
+  isTestActive: 0
   TestPanelObject: {fileID: 4979992368426357441, guid: a61134e41ac60264b8e0b79b2c182000, type: 3}
   PanelsParent: {fileID: 729774559}
   StartPanel: {fileID: 413392033}
   EndPanel: {fileID: 1653099981}
+  Button: {fileID: 1198042640}
+  StartText: {fileID: 1631074750}
   EndPanelText: {fileID: 861625261}
   PassText: {fileID: 986495275}
   questionsPanels: []
